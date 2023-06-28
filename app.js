@@ -14,8 +14,6 @@ function logger() {
   }
 }
 
-*/
-
 function first() {
   console.log(1);
 }
@@ -48,12 +46,46 @@ function callbackHell() {
     const data = {
       user: 'Paulie',
     };
-      console.log(data)
-      setTimeout(() => {
-          console.log('Data saved')
-      }, 1000)
+    console.log(data);
+    setTimeout(() => {
+      console.log('Data saved');
+    }, 10);
     console.log('Got data...');
-  }, 500);
+  }, 10);
 }
 
-callbackHell()
+// callbackHell();
+
+const promise = new Promise((resolve, reject) => {
+  resolve({ user: 'PaulT' });
+  //reject('It failed !!');
+});
+
+promise
+  .then((data) => {
+    const user = data;
+    return fetch('https://jsonplaceholder.typicode.com/todos/1');
+  })
+  .then((todos) => {
+    console.log(todos);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+
+
+const promise2 = new Promise((resolve, reject) => {
+  setTimeout(() => resolve('This is data from server')), 2000;
+});
+
+promise2.then(res => {
+    console.log(res)
+})
+
+*/
+fetch('https://jsonplaceholder.typicode.com/todos/1').then(data => {
+    return data.json()
+}).then(jsonData => {
+    console.log(jsonData)
+})
