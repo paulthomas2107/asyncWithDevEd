@@ -83,9 +83,26 @@ promise2.then(res => {
     console.log(res)
 })
 
-*/
-fetch('https://jsonplaceholder.typicode.com/todos/1').then(data => {
-    return data.json()
-}).then(jsonData => {
-    console.log(jsonData)
-})
+
+fetch('https://jsonplaceholder.typicode.com/todos/1')
+  .then((data) => {
+    return data.json();
+  })
+  .then((jsonData) => {
+    console.log(jsonData);
+  })
+  .catch((err) => {
+    console.log('Somethig wrong....' + err);
+  })
+  .finally(() => {
+    console.log('Finally, finished');
+  });
+
+  */
+async function getTodos() {
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+  const data = await response.json();
+  console.log(data);
+}
+getTodos();
+    
